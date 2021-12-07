@@ -1,9 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import logo from '../assets/logo.svg'
 import Input from './Input'
 
-function Sidebar() {
+function Sidebar({onSubmit}) {
+
+    const [ formState, setFormState] = useState({
+        username:'',
+        full_name: '',
+        email: ''
+    })
+
+    function handleChange(e){
+        console.log(e.target.value)
+        setFormState({
+            ...formState,
+            [e.target.name]: e.target.value
+        })
+    }
+
     return (
         <Container>
             <LogoWrapper>
@@ -12,32 +27,37 @@ function Sidebar() {
                     App <span>Name</span>
                     </h3>
             </LogoWrapper>
-            <Form>
+            <InputContainer>
+            <Form onSubmit={onSubmit}>
             <h3>Sign Up</h3>
-            <Input placeholder='Full Name'/>
-            <Input type='email' placeholder='Email'/>
-            <Input type='text' placeholder='User Name'/>
+            <StyledInput onChange={handleChange} placeholder='User Name' value={formState.username} type='text' name='username'/>
+            <StyledInput onChange={handleChange}  placeholder='Full Name' value={formState.full_name} name='full_name'/>
+            <StyledInput onChange={handleChange}  placeholder='Email' value={formState.email} type='email' name='email'/>
             <button>Sign Up</button>
             </Form>
+            </InputContainer>
             <div>
         <Terms>
-          By signing up, I agree to the Privacy Policy <br /> and Terms of
-          Service
+        By signing up, I agree to the Privacy Policy <br /> and Terms of
+        Service
         </Terms>
         <h4>
-          Already have an account? <span>Sign In</span>
+        Already have an account? <span>Sign In</span>
         </h4>
-      </div>
+    </div>
         </Container>
     )
 }
 
+
+//###########################  Components styling
+
 const Terms = styled.p`
- padding: 0 1rem;
-  text-align: center;
-  font-size: 10px;
-  color: #808080;
-  font-weight: 300;
+padding: 0 1rem;
+text-align: center;
+font-size: 10px;
+color: #808080;
+font-weight: 300;
 `
 
 const Form = styled.form`
@@ -117,5 +137,50 @@ span{
     font-size: 18px;
 }
 `;
+
+//##################### Input styling 
+
+const InputContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+`;
+
+const StyledInput = styled.input`
+width: 80%;
+max-width: 350px;
+min-width: 250px;
+height: 40px;
+border: none;
+margin: 0.5rem 0;
+background-color: #f5f5f5;
+box-shadow: 0px 14px 9px -15px rgba(0, 0 ,0 , 0.55);
+border-radius: 10px;
+padding: 0 1rem;
+transition: all 0.2s ease-in;
+
+&:hover{
+    transform: translateY(-3px);
+}
+`;
+
+const Status = styled.div`
+height:  10px;
+width: 10px;
+background: #9d9d9d;
+border-radius: 10px;
+margin-left: 1rem;
+
+${StyledInput}:focus + & {
+    background: #ffa689;
+}
+
+${StyledInput}:invalid + & {
+    background: #fe2f75;
+}
+
+${StyledInput}:valid + & {
+    background: #70edb9;
+}`
 
 export default Sidebar

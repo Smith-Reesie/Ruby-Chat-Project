@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 
 function Input({ type, placeholder}) {
+
+
     return (
         <Container>
             <StyledInput 
@@ -13,6 +15,10 @@ function Input({ type, placeholder}) {
         </Container>
     )
 }
+
+// connect input to form state 
+
+
 
 const Container = styled.div`
 display: flex;
