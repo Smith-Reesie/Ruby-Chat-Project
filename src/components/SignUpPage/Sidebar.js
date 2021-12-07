@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import logo from '../assets/logo.svg'
+import logo from '../../assets/logo.svg'
 import Input from './Input'
+
 
 function Sidebar({onSubmit}) {
 
@@ -34,8 +35,10 @@ function Sidebar({onSubmit}) {
             <StyledInput onChange={handleChange}  placeholder='Full Name' value={formState.full_name} name='full_name'/>
             <StyledInput onChange={handleChange}  placeholder='Email' value={formState.email} type='email' name='email'/>
             <button>Sign Up</button>
+            <button>Chat</button>
             </Form>
             </InputContainer>
+            
             <div>
         <Terms>
         By signing up, I agree to the Privacy Policy <br /> and Terms of
