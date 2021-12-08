@@ -1,12 +1,11 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import logo from '../../assets/logo.svg'
-import Input from './Input'
 
 
 function Sidebar({onSubmit}) {
 
-    const [ formState, setFormState] = useState({
+    const [user, setUser] = useState({
         username:'',
         full_name: '',
         email: ''
@@ -14,10 +13,15 @@ function Sidebar({onSubmit}) {
 
     function handleChange(e){
         console.log(e.target.value)
-        setFormState({
-            ...formState,
+        setUser({
+            ...user,
             [e.target.name]: e.target.value
         })
+    }
+
+    function handleSubmit(e){
+        e.preventDefault()
+        onSubmit(user)
     }
 
     return (
@@ -29,11 +33,11 @@ function Sidebar({onSubmit}) {
                     </h3>
             </LogoWrapper>
             <InputContainer>
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={handleSubmit}>
             <h3>Sign Up</h3>
-            <StyledInput onChange={handleChange} placeholder='User Name' value={formState.username} type='text' name='username'/>
-            <StyledInput onChange={handleChange}  placeholder='Full Name' value={formState.full_name} name='full_name'/>
-            <StyledInput onChange={handleChange}  placeholder='Email' value={formState.email} type='email' name='email'/>
+            <StyledInput onChange={handleChange} placeholder='User Name' value={user.username} type='text' name='username'/>
+            <StyledInput onChange={handleChange}  placeholder='Full Name' value={user.full_name} name='full_name'/>
+            <StyledInput onChange={handleChange}  placeholder='Email' value={user.email} type='email' name='email'/>
             <button>Sign Up</button>
             <button>Chat</button>
             </Form>
