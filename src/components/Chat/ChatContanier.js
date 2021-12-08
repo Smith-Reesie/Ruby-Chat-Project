@@ -3,7 +3,8 @@ import MessageContainer from './MessageContainer'
 import Profile from './Profile'
 import styled from 'styled-components'
 
-function ChatContanier() {
+function ChatContanier({currentUser}) {
+    
     return (
         <Container>
             <Wrapper>

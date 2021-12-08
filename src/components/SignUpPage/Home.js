@@ -6,12 +6,12 @@ import bg from '../../assets/bg.png'
 import NavBar from './NavBar'
 
 
-function Home() {
+function Home({onSubmit}) {
     return (
     <Container>
         <Wrapper>
         <NavBar/>
-                <Sidebar/>
+                <Sidebar onSubmit={onSubmit}/>
                 <Main/>
         </Wrapper>
     </Container>
