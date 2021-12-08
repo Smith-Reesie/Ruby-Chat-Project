@@ -10,35 +10,31 @@ import ChatContanier from './Chat/ChatContanier';
 
 function App() {
 
-const [user, setUser] = useState({ 
-  userName: '',
-  fullName: '',
-  email: ''
+const [currentUser, setCurrentUser] = useState({id : ''})
 
-})
 
-function handleSubmit(e, newUser){
-  e.preventDefault();
-  fetch('http://localhost:9292/users', {
-    method: "POST",
-    headers: {
-      "content-type" : "application/json"
-    },
-    body: JSON.stringify(newUser)
-  })
-  .then(r=>r.json)
-  .then((x) => setUser([...user, x]))
-}
+  function handleSubmit(newUser){
+    fetch('http://localhost:9293/users', {
+      method: "POST",
+      headers: {
+        "content-type" : "application/json"
+      },
+      body: JSON.stringify(newUser)
+    })
+    .then(r=>r.json())
+    .then((x) => setCurrentUser({id : x.id}))
+  }
+
 
 
   return (
       <> 
       <Switch>
       <Route exact path='/'>
-        <Home/>
+        <Home onSubmit={handleSubmit}/>
       </Route>
       <Route exact path='/Chat'>
-    <ChatContanier/>
+    <ChatContanier currentUser={currentUser}/>
       </Route>
       </Switch>
     </>

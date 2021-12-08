@@ -1,14 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 import MessageContainer from './MessageContainer'
 import Profile from './Profile'
 import styled from 'styled-components'
 
-function ChatContanier() {
+function ChatContanier({currentUser}) {
+
+    const [userData, setUserData] = useState(null)
+
+setInterval(() => {
+    fetch(`http://localhost:9293/users/${currentUser.id}`)
+    .then(res => res.json())
+    .then(user => setUserData(user))
+}, 60000);
+console.log(userData)
+
     return (
         <Container>
             <Wrapper>
-            <Profile/>
-            <MessageContainer/>
+            <Profile setUserData={setUserData} userData={userData} currentUser={currentUser}/>
+            <MessageContainer setUserData={setUserData} userData={userData} currentUser={currentUser}/>
             </Wrapper>
         </Container>
     )
