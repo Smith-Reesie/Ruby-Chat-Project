@@ -1,17 +1,19 @@
 import React, {useState} from 'react'
 // import styled from 'styled-components'
 import Home from './SignUpPage/Home';
-import {Route, Switch, NavLink} from 'react-router-dom'
+import {Route, Switch, Link, useHistory} from 'react-router-dom'
 import ChatContanier from './Chat/ChatContanier';
-<script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
+
+{/* <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script> */}
 
 // import Main from './SignUpPage/Main';
 // import Sidebar from './SignUpPage/Sidebar';
 
 function App() {
-
-const [currentUser, setCurrentUser] = useState({id : ''})
-
+  const[update, setUpdate] = useState(" ")
+  const [currentUser, setCurrentUser] = useState({id : ''})
+  
+  let history = useHistory();
 
   function handleSubmit(newUser){
     fetch('http://localhost:9293/users', {
@@ -23,7 +25,14 @@ const [currentUser, setCurrentUser] = useState({id : ''})
     })
     .then(r=>r.json())
     .then((x) => setCurrentUser({id : x.id}))
+    .then(handleRoute)
   }
+
+
+function handleRoute(){
+    history.push('/Chat')
+}
+
 
 
 
@@ -34,7 +43,7 @@ const [currentUser, setCurrentUser] = useState({id : ''})
         <Home onSubmit={handleSubmit}/>
       </Route>
       <Route exact path='/Chat'>
-    <ChatContanier currentUser={currentUser}/>
+    <ChatContanier update={update} setUpdate={setUpdate} currentUser={currentUser}/>
       </Route>
       </Switch>
     </>

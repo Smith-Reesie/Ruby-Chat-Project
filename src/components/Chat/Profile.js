@@ -3,23 +3,30 @@ import styled from 'styled-components'
 import MessageCards from './ChatCards'
 import UserCard from './UserCard'
 
-function Profile() {
-    const x = [1]
+function Profile({currentUser, setCurrentUser, convos, userData}) {
+
+    console.log(userData.conversations)
+    
+
     return (
         <Container>
-            {x.length<1? 
+            
             <div>
-                <UserCard/>
+                {convos.map((convo) =>{ 
+                return <MessageCards 
+                key={convo.id}
+                convo={convo}/>
+                })}
             </div> 
-            : <>
+             
             <div>
             <button>Profile</button>
             <button>Chats</button>
             </div>
             <div>
-                <MessageCards/>
+                <UserCard/>
             </div>
-            </>}
+    
         </Container>
 
     )
@@ -47,3 +54,27 @@ border: 1px solid black;
 }
 `
 export default Profile
+
+
+
+
+
+// ternary once button is created 
+
+// {userData.conversations !== [] ? 
+//     <div>
+//         {allConvos.map((convo) =>{ 
+//         return <MessageCards 
+//         key={convo.id}
+//         convo={convo}/>
+//         })}
+//     </div> 
+//     : <>
+//     <div>
+//     <button>Profile</button>
+//     <button>Chats</button>
+//     </div>
+//     <div>
+//         <UserCard/>
+//     </div>
+//     </>}

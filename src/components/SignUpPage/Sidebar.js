@@ -35,7 +35,7 @@ function Sidebar({onSubmit}) {
             <InputContainer>
             <Form onSubmit={handleSubmit}>
             <h3>Sign Up</h3>
-            <StyledInput onChange={handleChange} placeholder='User Name' value={user.username} type='text' name='username'/>
+            <StyledInput onChange={handleChange}  placeholder='User Name' value={user.username} type='text' name='username'/>
             <StyledInput onChange={handleChange}  placeholder='Full Name' value={user.full_name} name='full_name'/>
             <StyledInput onChange={handleChange}  placeholder='Email' value={user.email} type='email' name='email'/>
             <button>Sign Up</button>

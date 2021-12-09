@@ -1,24 +1,39 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import MessageContainer from './MessageContainer'
 import Profile from './Profile'
 import styled from 'styled-components'
 
-function ChatContanier({currentUser}) {
+function ChatContanier({currentUser, setUpdate, update}) {
 
-    const [userData, setUserData] = useState(null)
+    const [userData, setUserData] = useState([])
+    const [allConvos, setAllConvos] = useState([])
+    
 
-setInterval(() => {
+
+useEffect(()=> {
+    fetch(`http://localhost:9293/conversations`)
+    .then(res => res.json())
+    .then(data => console.log(data))
+
     fetch(`http://localhost:9293/users/${currentUser.id}`)
     .then(res => res.json())
     .then(user => setUserData(user))
-}, 60000);
-console.log(userData)
+}, [currentUser.id, update])
+
+
 
     return (
         <Container>
             <Wrapper>
-            <Profile setUserData={setUserData} userData={userData} currentUser={currentUser}/>
-            <MessageContainer setUserData={setUserData} userData={userData} currentUser={currentUser}/>
+            <Profile 
+            setUserData={setUserData} 
+            userData={userData} 
+            currentUser={currentUser}
+            convos={allConvos}/>
+            <MessageContainer 
+            setUserData={setUserData} 
+            userData={userData} 
+            currentUser={currentUser}/>
             </Wrapper>
         </Container>
     )
