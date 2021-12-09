@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import MessageContainer from './MessageContainer'
 import Profile from './Profile'
 import styled from 'styled-components'
+import bg from '../../assets/bg.png'
 
 function ChatContanier({currentUser, setUpdate, update}) {
 
@@ -18,6 +19,7 @@ useEffect(()=> {
     .then(res => res.json())
     .then(user => setUserData(user))
 }, [currentUser.id])
+
 
 console.log(currentConvo)
 
@@ -48,7 +50,7 @@ console.log(currentConvo)
 }
 
 const Container = styled.div`
-background-color: whitesmoke;
+background-color: black;
 position: absolute;
 top: 0;
 left: 0;
@@ -57,6 +59,7 @@ right: 0;
 `;
 
 const Wrapper = styled.div`
+background-image: url(${bg});
 background-position: center;
 background-size: cover;
 background-repeat:no-repeat ;
