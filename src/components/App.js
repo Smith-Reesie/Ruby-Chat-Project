@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 // import styled from 'styled-components'
 import Home from './SignUpPage/Home';
 import {Route, Switch, Link, useHistory} from 'react-router-dom'
@@ -14,7 +14,8 @@ function App() {
 
   const[update, setUpdate] = useState(" ")
   const [currentUser, setCurrentUser] = useState({id : ''})
-  
+
+
   let history = useHistory();
 
   function handleRoute(){

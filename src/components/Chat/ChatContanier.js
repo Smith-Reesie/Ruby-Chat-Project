@@ -20,9 +20,6 @@ useEffect(()=> {
     .then(user => setUserData(user))
 }, [currentUser.id])
 
-
-console.log(currentConvo)
-
     return (
         <Container>
             <Wrapper>

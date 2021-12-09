@@ -4,31 +4,46 @@ import styled from 'styled-components'
 
 function MessageContainer({currentConvo,currentUser}) {
     const [messages, setMessages] = useState([])
-
     const [newMsg, setNewMsg] = useState({message: '',user_id:'',conversation_id:''})
-
+    // const [change, setChange] = useState("")
+     
     function handleMsgChange(e){
         setNewMsg({[e.target.name]: e.target.value, user_id: `${currentUser.id}`, conversation_id: `${currentConvo.id}`})
     }
 
-function handleSubmit(e){
-    e.preventDefault()
-    fetch('http://localhost:9293/messages', {
-    method: "POST",
-    headers: {
-    "content-type" : "application/json"
-    },
-    body: JSON.stringify(newMsg)
-})
-.then(r=>r.json())
-.then((x) => setMessages([...messages,x]))
-}
+    function handleSubmit(e){
+        e.preventDefault()
+        fetch('http://localhost:9293/messages', {
+        method: "POST",
+        headers: {
+        "content-type" : "application/json"
+        },
+        body: JSON.stringify(newMsg)
+    })
+    .then(r=>r.json())
+    .then((x) => {
+        setMessages([...messages,x])
+        setNewMsg({message: '',user_id:'',conversation_id:''})    
+    })
+    }
+
+    function handleDelete(e){
+     let deleteMsg = e.target.id 
+        fetch(`http://localhost:9293/messages/${deleteMsg}`, {
+        method: "DELETE",
+        })
+        .then((r) => r.json())
+        .then((deletedMsg) => setMessages(messages.filter(m => m.id !== deletedMsg.id)))
+    }
+  
     useEffect(() => {
         fetch(`http://localhost:9293/conversations/${currentConvo.id}/messages`)
         .then(res => res.json())
-        .then(msg => setMessages(msg))
+        .then(msg => {
+            setMessages(msg)
+        })
     },[currentConvo.id])
-        
+
     return (
         <Container>
             <MsgHeader>{currentConvo.topic}</MsgHeader>
@@ -36,12 +51,12 @@ function handleSubmit(e){
              return <Msg>
                  <Avatardiv>
                         <img src='https://w7.pngwing.com/pngs/247/564/png-transparent-computer-icons-user-profile-user-avatar-blue-heroes-electric-blue.png'></img>
-                 </Avatardiv>
-                        
+                 </Avatardiv>    
                  <p><span>User:</span> <br/> {message.message}</p>
+                 <p >{message.message}</p>
+                 <button value={message.user_id} id ={message.id} onClick ={handleDelete}>x</button>
              </Msg>
          }) }
-        
             </MsgBody>
             <div>
             <MsgForm onSubmit={handleSubmit}>

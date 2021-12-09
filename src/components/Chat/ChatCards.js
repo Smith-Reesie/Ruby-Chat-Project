@@ -13,7 +13,6 @@ function ChatCards({convo, setCurrentConvo}) {
 
         <Container onClick={handleClick}>
             <h2 id={convo.id}>{convo.topic}</h2>
-            {/* <h6>last message</h6> */}
         </Container>
     
     )
