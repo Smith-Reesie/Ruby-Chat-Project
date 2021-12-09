@@ -3,18 +3,16 @@ import styled from 'styled-components'
 
 function ChatCards({convo, setCurrentConvo}) {
 
-    const {id, topic} = convo
-console.log(convo)
-
-function handleMessageRender(){
-    setCurrentConvo(convo.id.toString())
-
-}
+    function handleClick(e){
+       let x= e.target.id
+       let y= e.target.innerText
+        setCurrentConvo({id: x ,topic: y})
+    }
 
     return (
 
-        <Container>
-            <h2 onClick={handleMessageRender}>{topic}</h2>
+        <Container onClick={handleClick}>
+            <h2 id={convo.id}>{convo.topic}</h2>
             {/* <h6>last message</h6> */}
         </Container>
     

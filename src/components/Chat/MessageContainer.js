@@ -1,39 +1,47 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 
 
-function MessageContainer() {
+function MessageContainer({currentConvo,currentUser}) {
+    const [messages, setMessages] = useState([])
 
-// const [currentMessage, setCurrentMessage] = useState('')
+    const [newMsg, setNewMsg] = useState({message: '',user_id:'',conversation_id:''})
 
-// function sendMessage(){
-//     if (currentMessage !== '') {
-//         const messageDate = {
-//             conversation_id: conversation,
-//             user_id: username,
-//             message: currentMessage,
-//             timestamps: new Date(Date.now()).getTime() + ':' + new Date(Date.now()).getMinutes()
-//         }
-//     }
+    function handleMsgChange(e){
+        setNewMsg({[e.target.name]: e.target.value, user_id: `${currentUser.id}`, conversation_id: `${currentConvo.id}`})
+    }
 
-// }
-
+function handleSubmit(e){
+    e.preventDefault()
+    fetch('http://localhost:9293/messages', {
+    method: "POST",
+    headers: {
+    "content-type" : "application/json"
+    },
+    body: JSON.stringify(newMsg)
+})
+.then(r=>r.json())
+.then((x) => setMessages([...messages,x]))
+}
+    useEffect(() => {
+        fetch(`http://localhost:9293/conversations/${currentConvo.id}/messages`)
+        .then(res => res.json())
+        .then(msg => setMessages(msg))
+    },[currentConvo.id])
+        
     return (
         <Container>
-            <div>header</div>
-            <MsgBody>Body
-            <Msg class="container">
-                <p>Hello. How are you today?</p>
-                <span class="time-right">11:00</span>
-            </Msg>
-            <Msg class="container darker">
-                <p>Hey! I'm fine. Thanks for asking!</p>
-                <span class="time-left">11:01</span>
-            </Msg>
+            <div>{currentConvo.topic}</div>
+            <MsgBody>{messages.map((message) =>{
+             return <Msg>
+                 <p>{message.message}</p>
+             </Msg>
+         }) }
+            
             </MsgBody>
             <div>
-            <MsgForm>
-            <MsgInput type='text' placeholder='Type message here...'></MsgInput>
+            <MsgForm onSubmit={handleSubmit}>
+            <MsgInput type='text' name="message" value={newMsg.message} onChange={handleMsgChange} placeholder='Type message here...'></MsgInput>
             <button>send⌲</button>
             </MsgForm>
             </div>
@@ -51,18 +59,18 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 border: 1px solid black;
- /* @media (max-width: 900px) {
-        display: none;
-    } */
+/* @media (max-width: 900px) {
+    display: none;
+} */
 `;
 
 const MsgBody = styled.div`
-  margin: 0 auto;
-  max-width: 800px;
-  height: 400px;
-  top: 10%;
-  padding: 0 20px;
-  border: 1px solid violet;
+margin: 0 auto;
+max-width: 800px;
+height: 400px;
+top: 10%;
+padding: 0 20px;
+border: 1px solid violet;
 `;
 
 const Msg = styled.div`
@@ -92,4 +100,17 @@ display: flex;
 align-items: center;
 `
 
+// const [currentMessage, setCurrentMessage] = useState('')
+
+// function sendMessage(){
+//     if (currentMessage !== '') {
+//         const messageDate = {
+//             conversation_id: conversation,
+//             user_id: username,
+//             message: currentMessage,
+//             timestamps: new Date(Date.now()).getTime() + ':' + new Date(Date.now()).getMinutes()
+//         }
+//     }
+
+// }
 export default MessageContainer

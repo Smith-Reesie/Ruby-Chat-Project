@@ -10,6 +10,7 @@ import ChatContanier from './Chat/ChatContanier';
 // import Sidebar from './SignUpPage/Sidebar';
 
 function App() {
+
   const[update, setUpdate] = useState(" ")
   const [currentUser, setCurrentUser] = useState({id : ''})
   
@@ -32,11 +33,6 @@ function App() {
     .then(handleRoute)
   }
 
-
-
-
-
-
   return (
       <> 
       <Switch>
@@ -48,6 +44,8 @@ function App() {
       </Route>
       </Switch>
     </>
+
+
   )
 }
 

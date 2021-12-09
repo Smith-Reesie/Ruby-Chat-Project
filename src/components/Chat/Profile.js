@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ChatCards from './ChatCards'
 import UserCard from './UserCard'
 
-function Profile({currentUser, setCurrentUser, convos, setConvos, setCurrentConvo}) {
+function Profile({currentUser, setCurrentUser, convos, setConvos, setCurrentConvo,currentConvo}) {
 
     const [newTopic, setNewTopic] = useState({topic: ''})
 
@@ -24,6 +24,7 @@ function handleSubmit(e){
 .then((x) => setConvos([...convos, x]))
 }
 
+
     return (
         <Container>
             
@@ -38,7 +39,8 @@ function handleSubmit(e){
                 return <ChatCards 
                 key={convo.id}
                 convo={convo}
-                setCurrentConvo={setCurrentConvo}/>
+                setCurrentConvo={setCurrentConvo}
+                currentConvo={currentConvo}/>
 
                 })}
             </div> 
