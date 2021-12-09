@@ -1,24 +1,48 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
-import MessageCards from './ChatCards'
+import ChatCards from './ChatCards'
 import UserCard from './UserCard'
 
-function Profile({currentUser, setCurrentUser, convos, userData}) {
+function Profile({currentUser, setCurrentUser, convos, setConvos, setCurrentConvo}) {
 
-    console.log(userData.conversations)
-    
+    const [newTopic, setNewTopic] = useState({topic: ''})
+
+    function handleTopicChange(e){
+        setNewTopic({[e.target.name]: e.target.value})
+    }
+
+function handleSubmit(e){
+    e.preventDefault()
+    fetch('http://localhost:9293/conversations', {
+    method: "POST",
+    headers: {
+    "content-type" : "application/json"
+    },
+    body: JSON.stringify(newTopic)
+})
+.then(r=>r.json())
+.then((x) => setConvos([...convos, x]))
+}
 
     return (
         <Container>
             
             <div>
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <input name='topic' onChange={handleTopicChange} value={newTopic.topic} ></input>
+                    <button >Start new Chat</button>
+                </form>
+            </div>
                 {convos.map((convo) =>{ 
-                return <MessageCards 
+                return <ChatCards 
                 key={convo.id}
-                convo={convo}/>
+                convo={convo}
+                setCurrentConvo={setCurrentConvo}/>
+
                 })}
             </div> 
-             
+            
             <div>
             <button>Profile</button>
             <button>Chats</button>

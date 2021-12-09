@@ -7,13 +7,14 @@ function ChatContanier({currentUser, setUpdate, update}) {
 
     const [userData, setUserData] = useState([])
     const [allConvos, setAllConvos] = useState([])
+    const [currentConvo, setCurrentConvo] = useState('')
     
 
 
 useEffect(()=> {
     fetch(`http://localhost:9293/conversations`)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => setAllConvos(data))
 
     fetch(`http://localhost:9293/users/${currentUser.id}`)
     .then(res => res.json())
@@ -29,11 +30,15 @@ useEffect(()=> {
             setUserData={setUserData} 
             userData={userData} 
             currentUser={currentUser}
-            convos={allConvos}/>
+            convos={allConvos}
+            setConvos={setAllConvos}
+            SetCurrentConvo={setCurrentConvo}
+            />
             <MessageContainer 
             setUserData={setUserData} 
             userData={userData} 
-            currentUser={currentUser}/>
+            currentUser={currentUser}
+            currentConvo={currentConvo}/>
             </Wrapper>
         </Container>
     )

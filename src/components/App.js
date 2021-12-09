@@ -15,6 +15,10 @@ function App() {
   
   let history = useHistory();
 
+  function handleRoute(){
+      history.push('/Chat')
+  }
+  
   function handleSubmit(newUser){
     fetch('http://localhost:9293/users', {
       method: "POST",
@@ -29,9 +33,6 @@ function App() {
   }
 
 
-function handleRoute(){
-    history.push('/Chat')
-}
 
 
 

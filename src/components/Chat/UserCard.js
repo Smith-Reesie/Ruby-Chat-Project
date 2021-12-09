@@ -10,7 +10,7 @@ function UserCard({convo}) {
     }
     return (
         <Container >
-            <h1 onClick={handleClick}>{convo.topic}</h1> 
+            {/* <h1 onClick={handleClick}>{convo.topic}</h1>  */}
             <button>x</button>
         </Container>
     )
