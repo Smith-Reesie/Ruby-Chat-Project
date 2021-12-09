@@ -4,9 +4,9 @@ import styled from 'styled-components'
 function ChatCards({convo, setCurrentConvo}) {
 
     function handleClick(e){
-       let x= e.target.id
-       let y= e.target.innerText
-        setCurrentConvo({id: x ,topic: y})
+    let x= e.target.id
+    let y= e.target.innerText
+    setCurrentConvo({id: x ,topic: y})
     }
 
     return (
@@ -22,7 +22,11 @@ function ChatCards({convo, setCurrentConvo}) {
 const Container = styled.div`
 border: 1px solid blue;
 height: fit-content;
-width: fit-content;
+display: flex;
+/* flex-direction: row; */
+flex-wrap: wrap;
+margin: 5px;
+width: 100px;
 `
 
 export default ChatCards

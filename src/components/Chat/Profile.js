@@ -6,9 +6,14 @@ import UserCard from './UserCard'
 function Profile({currentUser, setCurrentUser, convos, setConvos, setCurrentConvo,currentConvo}) {
 
     const [newTopic, setNewTopic] = useState({topic: ''})
+    const [profile, setProfile] = useState(true)
 
     function handleTopicChange(e){
         setNewTopic({[e.target.name]: e.target.value})
+    }
+
+    function handleProfileView(){
+        setProfile(!profile )
     }
 
 function handleSubmit(e){
@@ -26,37 +31,38 @@ function handleSubmit(e){
 
 
     return (
+<>
+                    <div>
+                    <button onClick={handleProfileView}>Profile</button>
+                    <button onClick={handleProfileView}>Chats</button>
+                    <button>⚙️</button>
+                    </div>
         <Container>
+            {profile !== true ?  
             
-            <div>
             <div>
                 <form onSubmit={handleSubmit}>
                     <input name='topic' onChange={handleTopicChange} value={newTopic.topic} ></input>
                     <button >Start new Chat</button>
                 </form>
-            </div>
+                <Topics>    
+                    
                 {convos.map((convo) =>{ 
                 return <ChatCards 
                 key={convo.id}
                 convo={convo}
                 setCurrentConvo={setCurrentConvo}
-                currentConvo={currentConvo}/>
-
-                })}
+                currentConvo={currentConvo}/> })}
+                </Topics>
             </div> 
-            
-            <div>
-            <button>Profile</button>
-            <button>Chats</button>
-            </div>
+:
             <div>
                 <UserCard/>
-            </div>
+            </div>}
     
         </Container>
-
-    )
-}
+</>
+)}
 
 
 
@@ -66,8 +72,6 @@ min-width: 300px;
 backdrop-filter: blur(35px);
 background-color: rgb(255, 255, 255, 0.6);
 height: 100%;
-display: flex;
-flex-direction: column;
 justify-content: space-evenly;
 align-items: center;
 padding: 0 1rem;
@@ -78,6 +82,14 @@ border: 1px solid black;
     position: absolute;
     padding: 0;
 }
+`
+
+const Topics = styled.div`
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+
+
 `
 export default Profile
 

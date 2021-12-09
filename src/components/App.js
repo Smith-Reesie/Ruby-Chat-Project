@@ -4,6 +4,7 @@ import Home from './SignUpPage/Home';
 import {Route, Switch, Link, useHistory} from 'react-router-dom'
 import ChatContanier from './Chat/ChatContanier';
 
+
 {/* <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script> */}
 
 // import Main from './SignUpPage/Main';
@@ -17,7 +18,7 @@ function App() {
   let history = useHistory();
 
   function handleRoute(){
-      history.push('/Chat')
+      history.push('/chat')
   }
   
   function handleSubmit(newUser){
@@ -39,7 +40,7 @@ function App() {
       <Route exact path='/'>
         <Home onSubmit={handleSubmit}/>
       </Route>
-      <Route exact path='/Chat'>
+      <Route exact path='/chat'>
     <ChatContanier update={update} setUpdate={setUpdate} currentUser={currentUser}/>
       </Route>
       </Switch>
