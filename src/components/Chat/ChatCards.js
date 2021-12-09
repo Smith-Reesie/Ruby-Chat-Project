@@ -1,17 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function ChatCards() {
+function ChatCards({convo, setCurrentConvo}) {
+
+    const {id, topic} = convo
+console.log(convo)
 
 function handleMessageRender(){
-console.log('hi')
+    setCurrentConvo(convo.id.toString())
+
 }
 
     return (
-        <Container onClick={handleMessageRender}>
-            <h2>Person Name</h2>
-            <h6>last message</h6>
+
+        <Container>
+            <h2 onClick={handleMessageRender}>{topic}</h2>
+            {/* <h6>last message</h6> */}
         </Container>
+    
     )
 }
 
