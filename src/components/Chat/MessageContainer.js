@@ -5,7 +5,6 @@ import styled from 'styled-components'
 function MessageContainer({currentConvo,currentUser}) {
     const [messages, setMessages] = useState([])
     const [newMsg, setNewMsg] = useState({message: '',user_id:'',conversation_id:''})
-    // const [change, setChange] = useState("")
      
     function handleMsgChange(e){
         setNewMsg({[e.target.name]: e.target.value, user_id: `${currentUser.id}`, conversation_id: `${currentConvo.id}`})
@@ -28,7 +27,7 @@ function MessageContainer({currentConvo,currentUser}) {
     }
 
     function handleDelete(e){
-     let deleteMsg = e.target.id 
+        let deleteMsg = e.target.id 
         fetch(`http://localhost:9293/messages/${deleteMsg}`, {
         method: "DELETE",
         })
@@ -40,7 +39,7 @@ function MessageContainer({currentConvo,currentUser}) {
         fetch(`http://localhost:9293/conversations/${currentConvo.id}/messages`)
         .then(res => res.json())
         .then(msg => {
-            setMessages(msg)
+        setMessages(msg)
         })
     },[currentConvo.id])
 
@@ -56,6 +55,7 @@ function MessageContainer({currentConvo,currentUser}) {
                  <p >{message.message}</p>
                  {message.user_id == currentUser.id ? 
                  <button value={message.user_id} id ={message.id} onClick ={handleDelete}>x</button> : null }
+
              </Msg>
          }) }
             </MsgBody>

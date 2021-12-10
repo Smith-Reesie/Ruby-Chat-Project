@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function ChatCards({convo, setCurrentConvo}) {
+function ChatCards({convo, setCurrentConvo,setConvos,convos}) {
 
     function handleClick(e){
     let x= e.target.id
@@ -9,14 +9,24 @@ function ChatCards({convo, setCurrentConvo}) {
     setCurrentConvo({id: x ,topic: y})
     }
 
+    function handleDelete(e){
+             let deleteConvo = e.target.id 
+               fetch(`http://localhost:9293/conversations/${deleteConvo}`, {
+               method: "DELETE",
+               })
+               .then((r) => r.json())
+               .then((deletedConvo) => setConvos(convos.filter(c => c.id !== deletedConvo.id)))
+           }
+
     return (
 
-        <Container onClick={handleClick}>
-            <h2 id={convo.id}>{convo.topic}</h2>
+        <Container >
+            <h2 onClick={handleClick} id={convo.id}>{convo.topic}</h2>
+            <button id={convo.id} onClick={handleDelete}>-</button> 
         </Container>
     
     )
-}
+    }
 
 const Container = styled.div`
     border: 1px solid #0000ff00;

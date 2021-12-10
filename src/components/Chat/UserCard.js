@@ -3,15 +3,12 @@ import styled from 'styled-components'
 
 
 function UserCard({userData}) {
-
-
-
-    return (
+  return (
         <Container> 
             <img src="/a.png" className="avatar"/>
             <h1> {userData.username}</h1>
             <p> {userData.email}</p>
-            <button>x</button>
+            <button>sign out</button>
         </Container>
     )
 }

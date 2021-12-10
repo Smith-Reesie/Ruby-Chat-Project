@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ChatCards from './ChatCards'
 import UserCard from './UserCard'
 
-function Profile({currentUser, setCurrentUser, convos, setConvos, setCurrentConvo,currentConvo,userData}) {
+function Profile({currentUser,setCurrentUser, convos, setConvos, setCurrentConvo,currentConvo,userData}) {
 
     const [newTopic, setNewTopic] = useState({topic: ''})
     const [profile, setProfile] = useState(true)
@@ -18,6 +18,7 @@ function Profile({currentUser, setCurrentUser, convos, setConvos, setCurrentConv
 
 function handleSubmit(e){
     e.preventDefault()
+    {newTopic.topic === "" ? alert("Please enter a topic") : 
     fetch('http://localhost:9293/conversations', {
     method: "POST",
     headers: {
@@ -27,7 +28,7 @@ function handleSubmit(e){
 })
 .then(r=>r.json())
 .then((x) => setConvos([...convos, x]))
-}
+}}
 
 
     return (
@@ -51,7 +52,9 @@ function handleSubmit(e){
                 return <ChatCards 
                 key={convo.id}
                 convo={convo}
+                setConvos={setConvos}
                 setCurrentConvo={setCurrentConvo}
+                convos={convos}
                 currentConvo={currentConvo}/> })}
                 </Topics>
             </div> 
