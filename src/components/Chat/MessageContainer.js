@@ -54,7 +54,8 @@ function MessageContainer({currentConvo,currentUser}) {
                  </Avatardiv>    
                  <p><span>User:</span> <br/> {message.message}</p>
                  <p >{message.message}</p>
-                 <button value={message.user_id} id ={message.id} onClick ={handleDelete}>x</button>
+                 {message.user_id == currentUser.id ? 
+                 <button value={message.user_id} id ={message.id} onClick ={handleDelete}>x</button> : null }
              </Msg>
          }) }
             </MsgBody>

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ChatCards from './ChatCards'
 import UserCard from './UserCard'
 
-function Profile({currentUser, setCurrentUser, convos, setConvos, setCurrentConvo,currentConvo}) {
+function Profile({currentUser, setCurrentUser, convos, setConvos, setCurrentConvo,currentConvo,userData}) {
 
     const [newTopic, setNewTopic] = useState({topic: ''})
     const [profile, setProfile] = useState(true)
@@ -57,7 +57,7 @@ function handleSubmit(e){
             </div> 
 :
             <div>
-                <UserCard/>
+                <UserCard userData={userData}/>
             </div>}
     
         </Container>
@@ -76,6 +76,7 @@ const Container = styled.div`
     align-items: center;
     padding: 0 1rem;
     border-radius: 107px;
+    
 
 @media (max-width: 500px) {
     width: 100vw;

@@ -17,10 +17,12 @@ justify-content: center;
 align-items: center;
 
 
+
 h1{
     font-size: 65px;
     font-weight: 900;
     color: whitesmoke;
+    
 
     @media (max-width: 900px) {
         display: none;
