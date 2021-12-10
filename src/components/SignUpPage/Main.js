@@ -4,7 +4,7 @@ import styled from 'styled-components'
 function Main() {
     return (
         <Container>
-            <h1>Start <br/> Chating</h1>
+            <h1>Start <br/> Chatting</h1>
         </Container>
     )
 }

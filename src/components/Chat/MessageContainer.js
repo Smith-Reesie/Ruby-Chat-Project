@@ -86,37 +86,55 @@ border: 1px solid black;
 `
 const MsgHeader = styled.div`
 border: 1px solid black;
+font-family: fantasy;
+font-weight: bolder;
+color: orange;
+background: orangered;
 `
 
 const Avatardiv = styled.div`
-border-radius: 50px;
+/* border-radius: 50px;
 border: 1px dotted indigo;
-width: 5%;
-height: 5%;
-text-align: center;
-justify-content: center;
-align-items: center;
-margin: 1px ;
-content: inherit;
+width: 30px;
+height: 30px;
+padding: 1px 1px;
+justify-content: center; 
+align-items: center; 
+margin: 2px; */
+
+    background: black;
+    border-radius: 50px;
+    border: 2px  #dfb4ff;
+    width: 20px;
+    height: 20px;
+    padding: 0.5rem;
+    margin: 2px;
+    text-align: center;
+    box-shadow: inset 5px 5px 9px 0px rgb(228 233 217 / 70%);
+
+
+/* content: inherit; */
 
 img{
-    height: 50%;
-    width: 50%;
+    height: 20%;
+    width: 20%;
+   
 }
 `
 
 
 const MsgBody = styled.div`
-background:linear-gradient(166deg, rgba(253,77,42,0.665703781512605) 19%, rgba(252,178,67,0.4920343137254902) 79%);
-overflow: scroll;
-max-width: 500px;
-min-width: 400px;
-min-height: 200px;
-height: 500px;
-top: 10%;
-padding: 0 10px;
-border: 1px solid violet;
-border-radius: 10px;
+    background: linear-gradient(
+62deg,rgb(255 255 255) 19%,rgb(244 244 244 / 67%) 79%);
+    overflow: scroll;
+    max-width: 500px;
+    min-width: 400px;
+    min-height: 200px;
+    height: 500px;
+    top: 10%;
+    padding: 0 10px;
+    border: none;
+    border-radius: 10px;
 `;
 
 const Msg = styled.div`
@@ -129,6 +147,7 @@ box-shadow: 5px 8px 4px -2px #000000;
 
 span{
     font-size: 20px;
+    color: orangered;
 }
 `;
 
@@ -152,10 +171,20 @@ align-items: center;
 button{
     border-radius: 10px;
     height: 40px;
+    margin: 1rem 0;
+    box-shadow: 0px 14px 9px -15px rgba(0, 0, 0, 0.55);
+    border-radius: 8px;
+    background-color: #70edb9;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+    &:hover {
+    transform: translateY(-3px);
 }
 `
 
-// const [currentMessage, setCurrentMessage] = useState('')
+/* // const [currentMessage, setCurrentMessage] = useState('')
 
 // function sendMessage(){
 //     if (currentMessage !== '') {
@@ -167,5 +196,16 @@ button{
 //         }
 //     }
 
-// }
+// } */
 export default MessageContainer
+/* // background: linear-gradient(
+//     62deg,rgb(255 255 255) 19%,rgb(244 244 244 / 67%) 79%);
+//         overflow: scroll;
+//         max-width: 500px;
+//         min-width: 400px;
+//         min-height: 200px;
+//         height: 500px;
+//         top: 10%;
+//         padding: 0 10px;
+//         border: none;
+//         border-radius: 10px; */

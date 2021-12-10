@@ -32,11 +32,11 @@ function handleSubmit(e){
 
     return (
 <>
-                    <div>
-                    <button onClick={handleProfileView}>Profile</button>
+                    <Btndiv>
+                    <button onClick={handleProfileView}>👤</button>
                     <button onClick={handleProfileView}>Chats</button>
                     <button>⚙️</button>
-                    </div>
+                    </Btndiv>
         <Container>
             {profile !== true ?  
             
@@ -68,26 +68,74 @@ function handleSubmit(e){
 
 
 const Container = styled.div`
-min-width: 300px;
-backdrop-filter: blur(35px);
-background-color: rgb(255, 255, 255, 0.6);
-height: 100%;
-justify-content: space-evenly;
-align-items: center;
-padding: 0 1rem;
-border: 1px solid black;
+    width: 300px;
+    backdrop-filter: blur(35px);
+    background-color: rgb(255 255 255 / 20%);
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    border-radius: 107px;
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     width: 100vw;
     position: absolute;
     padding: 0;
 }
+
+
+form{
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 72px 3px 3px 3px;
+}
+
+button{
+    margin: 1rem 0;
+    box-shadow: 0px 14px 9px -15px rgba(0, 0, 0, 0.55);
+    border-radius: 8px;
+    background-color: #70edb9;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+    &:hover {
+    transform: translateY(-3px);
+}
+}
+
+
+input{
+width: 150px;
+height: 20px;
+border: none;
+margin: 0.5rem 1rem;
+box-shadow: 0px 14px 9px -15px rgba(0, 0 ,0 , 0.55);
+border-radius: 10px;
+padding: 0 1rem;
+transition: all 0.2s ease-in;
+}
+`
+
+const Btndiv = styled.div`
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: space-evenly;
+    justify-content: start;
+    background: #000000;
+    padding: 9px 3px 3px 2px;
+
 `
 
 const Topics = styled.div`
+margin-top: 2rem;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
+align-items: center;
+
 
 
 `
